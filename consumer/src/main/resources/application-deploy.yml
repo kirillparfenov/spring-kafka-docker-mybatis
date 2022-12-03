@@ -1,0 +1,12 @@
+server:
+  error:
+    include-message: always
+
+kafka:
+  bootstrap:
+    servers: ${KAFKA_SERVERS}
+
+datasource:
+  url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_DATABASE}
+  username: ${DB_USER}
+  password: ${DB_PASSWORD}

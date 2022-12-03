@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.manrihter.kafka.consumer.mappers.UserMapper">
+
+    <sql id="KafkaUserColumns">
+        id,
+        name
+    </sql>
+
+    <resultMap id="UserMap" type="dev.manrihter.kafka.consumer.model.domain.KafkaUser">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <insert id="saveUser" parameterType="map">
+        <if test="kafkaUser!=null">
+            insert into kafka_users(name) values (#{kafkaUser.name})
+        </if>
+    </insert>
+
+    <select id="getAllUsers" resultMap="UserMap">
+        select <include refid="KafkaUserColumns"/>
+        from kafka_users
+    </select>
+</mapper>
