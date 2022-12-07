@@ -16,7 +16,7 @@ import java.util.Map;
 public class KafkaTopicConfig {
 
     @Value("${kafka.bootstrap.servers}")
-    String servers;
+    private String servers;
     private static final byte PARTITIONS = 10;
     private static final byte REPLICAS = 3;
 

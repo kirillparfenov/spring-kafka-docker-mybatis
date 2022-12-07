@@ -3,7 +3,7 @@ package dev.manrihter.kafka.producer.config.kafka;
 public enum KafkaTopics {
     USER_TOPIC("USER_TOPIC");
 
-    private String topic;
+    private final String topic;
     KafkaTopics(String topic) {
         this.topic = topic;
     }

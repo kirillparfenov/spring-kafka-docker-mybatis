@@ -20,7 +20,7 @@ import java.util.Map;
 public class KafkaProducerConfig {
 
     @Value("${kafka.bootstrap.servers}")
-    String servers;
+    private String servers;
 
     @Bean
     public KafkaTemplate<String, KafkaUser> registerKafkaTemplate() {

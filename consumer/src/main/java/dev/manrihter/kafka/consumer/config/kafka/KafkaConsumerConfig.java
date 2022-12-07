@@ -23,7 +23,7 @@ public class KafkaConsumerConfig {
     private static final String USER_GROUP = "USER_GROUP";
     private static final String USER_CONTAINER_FACTORY = "USER_CONTAINER_FACTORY";
     @Value("${kafka.bootstrap.servers}")
-    String servers;
+    private String servers;
 
     @Bean
     public ConsumerFactory<String, KafkaUser> consumerFactory() {
@@ -36,12 +36,12 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, servers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, USER_GROUP);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
 
-        return new DefaultKafkaConsumerFactory<>(
-                props, new StringDeserializer(), deserializer
-        );
+        return new DefaultKafkaConsumerFactory<>(props);
     }
 
     @Bean(USER_CONTAINER_FACTORY)
